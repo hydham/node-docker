@@ -1,0 +1,31 @@
+version: "3"
+services:
+  nginx:
+    ports:
+      - "3000:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  
+  node-app:
+    build:
+      context: .
+      args:
+        - NODE_ENV=development
+    environment:
+      - NODE_ENV=development
+      - MONGO_USER=hydham
+      - MONGO_PASSWORD=password
+      - MONGO_IP=mongo
+      - MONGO_PORT=27017
+      - SESSION_SECRET=secret
+      - REDIS_PORT=6379
+      - REDIS_URL=redis
+    volumes:
+      - ./:/app
+      - /app/node_modules
+    command: npm run dev
+
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=hydham
+      - MONGO_INITDB_ROOT_PASSWORD=password
