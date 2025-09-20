@@ -1,4 +1,3 @@
-version: "3"
 services:
   nginx:
     ports:
@@ -17,7 +16,6 @@ services:
     command: node index.js
 
   mongo:
-    image: mongo:6.0
     command: ["mongod", "--wiredTigerCacheSizeGB=0.25"]
     restart: unless-stopped
     environment:
