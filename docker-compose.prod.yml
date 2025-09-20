@@ -3,6 +3,7 @@ services:
   nginx:
     ports:
       - "80:80"
+  
   node-app:
     environment:
       - NODE_ENV=production
@@ -14,3 +15,8 @@ services:
       - REDIS_PORT=6379
       - REDIS_URL=redis
     command: node index.js
+
+  mongo:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD}
